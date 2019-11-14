@@ -15,7 +15,7 @@
 <meta property="og:description" content="创建版本库 初始化一个Git仓库，使用git init命令 添加文件到Git仓库，分两步： git add &amp;lt;file&amp;gt; git commit -m &amp;lt;message&amp;gt;    时光机穿梭版本回退 git reset - - hard HEAD^ 回退到上一个版本 git reset - - hard 1094a 回退到最新版本(窗口未关看到commit id) git re">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/11/01/20181101-git学习笔记/0.jpeg">
-<meta property="og:updated_time" content="2019-05-05T12:19:45.702Z">
+<meta property="og:updated_time" content="2019-11-14T02:38:28.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git学习笔记">
 <meta name="twitter:description" content="创建版本库 初始化一个Git仓库，使用git init命令 添加文件到Git仓库，分两步： git add &amp;lt;file&amp;gt; git commit -m &amp;lt;message&amp;gt;    时光机穿梭版本回退 git reset - - hard HEAD^ 回退到上一个版本 git reset - - hard 1094a 回退到最新版本(窗口未关看到commit id) git re">
@@ -184,6 +184,16 @@
 <ul>
 <li>git - -no-ff -m “merge with no-ff” dev</li>
 </ul>
+<ol>
+<li>主分支Master(公测)</li>
+<li>开发分支Develop(内测)</li>
+<li>临时性分支<ul>
+<li>功能分支(feature)分支</li>
+<li>预发布分支(release)分支</li>
+<li>修补bug分支(fixbug)分支</li>
+</ul>
+</li>
+</ol>
 <p><strong>注意</strong>:master分支非常稳定，仅用来发布新版本;dev分支是干活分支.</p>
 <h4 id="bug分支"><a href="#bug分支" class="headerlink" title="bug分支"></a>bug分支</h4><p>&nbsp;&nbsp;当接到代号101的bug任务时，创建<strong>issue-101</strong>,但当前的<strong>dev</strong>分支上进行的分支工作还没有提交。工作进行到一半没法提交，但bug必须在２小时内修复。<br>&nbsp;&nbsp;Git提供了<strong>stash</strong>功能，可以把当前的工作现场存储起来，等以后恢复现场后继续工作:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git stash</span><br><span class="line">Saved working directory and index state WIP on dev: f52c633 add merge</span><br></pre></td></tr></table></figure>
