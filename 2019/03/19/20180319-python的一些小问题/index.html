@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="骑鱼的猫">
 <meta property="og:description" content="1. 如何动态生成变量名？Q:lst = [‘A’, ‘B’, ‘C’, ‘D’] , 如何才能得到以 list 中元素命名的新列表 A = [], B = [], C = [], D = []呢?  方法一： 动态进行变量赋值，通过修改命名空间植入变量 12&amp;gt;&amp;gt;&amp;gt; for i in lst:&amp;gt;&amp;gt;&amp;gt;     globals()[i] = []  方法二：动态执行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-05T12:19:45.694Z">
+<meta property="og:updated_time" content="2020-01-02T02:35:58.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python的一些小问题">
 <meta name="twitter:description" content="1. 如何动态生成变量名？Q:lst = [‘A’, ‘B’, ‘C’, ‘D’] , 如何才能得到以 list 中元素命名的新列表 A = [], B = [], C = [], D = []呢?  方法一： 动态进行变量赋值，通过修改命名空间植入变量 12&amp;gt;&amp;gt;&amp;gt; for i in lst:&amp;gt;&amp;gt;&amp;gt;     globals()[i] = []  方法二：动态执行">
@@ -102,7 +102,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-如何动态生成变量名？"><span class="toc-number">1.</span> <span class="toc-text">1. 如何动态生成变量名？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-命名空间"><span class="toc-number">2.</span> <span class="toc-text">2. 命名空间</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-如何动态生成变量名？"><span class="toc-number">1.</span> <span class="toc-text">1. 如何动态生成变量名？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-命名空间"><span class="toc-number">2.</span> <span class="toc-text">2. 命名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-星号表达式"><span class="toc-number">3.</span> <span class="toc-text">3. 星号表达式</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -152,6 +152,16 @@
 </ul>
 <p><strong>备注:</strong>locals（）实际上没有返回局部名字空间，它返回的是一个拷贝。所以对它进行修改，修改的是拷贝，而对实际的局部名字空间中的变量值并无影响。</p>
 <h3 id="2-命名空间"><a href="#2-命名空间" class="headerlink" title="2. 命名空间"></a>2. 命名空间</h3><p><strong>Q:</strong>from module import 和 import module 之间的不同？<br>使用 import module，模块自身被导入，但是它保持着自已的名字空间，这就是为什么您需要使用模块名来访问它的函数或属性: module.function 的原因。但是使用 from module import，实际上是从另一个模块中将指定的函数和属性导入到您自己的名字空间，</p>
+<h3 id="3-星号表达式"><a href="#3-星号表达式" class="headerlink" title="3. 星号表达式"></a>3. 星号表达式</h3><p><strong>Q:</strong>星号表达式的试用场景?</p>
+<ul>
+<li><p>参数传递</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun1</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">    print(args, kwargs)</span><br><span class="line">    <span class="comment"># * 会将传入的参数放入名为args的元组中 </span></span><br><span class="line">    <span class="comment"># ** 会将传入的参数放入名为kwargs的字典中</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>unpack可迭代变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 赋值语句中的 * 用于列表数值取出</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a, *b, c = range(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment"># 用于递归求和</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(items)</span>:</span></span><br><span class="line">    head, *tail = items</span><br><span class="line">    <span class="keyword">return</span> head + sum(tail) <span class="keyword">if</span> tail <span class="keyword">else</span> head</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意：*表达式不可单独使用！</p>
 
   </div>
 </article>
@@ -178,7 +188,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-如何动态生成变量名？"><span class="toc-number">1.</span> <span class="toc-text">1. 如何动态生成变量名？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-命名空间"><span class="toc-number">2.</span> <span class="toc-text">2. 命名空间</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-如何动态生成变量名？"><span class="toc-number">1.</span> <span class="toc-text">1. 如何动态生成变量名？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-命名空间"><span class="toc-number">2.</span> <span class="toc-text">2. 命名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-星号表达式"><span class="toc-number">3.</span> <span class="toc-text">3. 星号表达式</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -210,7 +220,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2019 Chen He
+    Copyright &copy; 2020 Chen He
   </div>
   <div class="footer-right">
     <nav>
