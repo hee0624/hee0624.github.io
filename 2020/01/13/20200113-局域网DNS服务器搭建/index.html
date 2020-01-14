@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="骑鱼的猫">
 <meta property="og:description" content="背景介绍在公司内部，有预发布版本网站，内部管理系统等服务器。每一个访问都需要用ip，这样比较繁琐，又不容易记忆。为此，在本地局域网搭建了DNS服务器。 安装说明 安装bind9 apt install bind9  编辑named.conf.local 1234zone &amp;quot;zhiwenben.com&amp;quot; &amp;#123;         type master;         fi">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-14T02:48:53.868Z">
+<meta property="og:updated_time" content="2020-01-14T03:24:47.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="局域网DNS服务器搭建">
 <meta name="twitter:description" content="背景介绍在公司内部，有预发布版本网站，内部管理系统等服务器。每一个访问都需要用ip，这样比较繁琐，又不容易记忆。为此，在本地局域网搭建了DNS服务器。 安装说明 安装bind9 apt install bind9  编辑named.conf.local 1234zone &amp;quot;zhiwenben.com&amp;quot; &amp;#123;         type master;         fi">
@@ -156,7 +156,7 @@
 </li>
 <li><strong>测试</strong> <code>curl http://pre.soso.zhiwenben.com</code></li>
 </ol>
-<p><strong>不知道写点什么</strong>:本地有预发布版本pre.nlp.zhiwenben.com，线上阿里云有nlp.zhiwenben.com。刚开始选择在路由器里添加DNS解析，一顿操作猛如虎，以为大功告成，结果过了一会有些电脑ok，有些电脑不ok。实在想不通，有点头大。无奈之下配置了本地DNS服务器，但是配置网络的时候，不管将本地DNS选为主DNS还是备选DNS，都可能出现预发布版本或者线上版本打不开的情况。后来将线上版本的DNS解析也加到了本地DNS服务器当中，这个问题才得以解决。</p>
+<p><strong>不知道写点什么</strong>:本地有预发布版本pre.nlp.zhiwenben.com，线上阿里云有nlp.zhiwenben.com。刚开始选择在路由器里添加DNS解析，一顿操作猛如虎，以为大功告成，结果过了一会有些电脑ok，有些电脑不ok。实在想不通，有点头大。无奈之下配置了本地DNS服务器，但是配置网络的时候，不管将本地DNS选为主DNS还是备选DNS，都可能出现预发布版本或者线上版本打不开的情况。后来将线上版本的DNS解析也加到了本地DNS服务器当中，并且网络配置只选用本地DNS，这个问题才得以解决。</p>
 
   </div>
 </article>
