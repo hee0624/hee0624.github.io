@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Redis规约作者：陈贺 时间：2020-06-04 一.键值设计1.key名设计1.【强制】可读性和可管理性 以业务名(或数据库名)为前缀(防止key冲突)，用冒号分隔，比如业务名:表名:id:soso:event:1 2.【建议】简洁性 ​         保证语义的前提下，控制key的长度，当key较多时，内存占用也不容忽视。 ​        user:{uid}:friends:mess">
+<meta name="keywords" content="Redis,Guide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis规约">
+<meta property="og:url" content="http://yoursite.com/2020/06/04/20200602-Redis规约/index.html">
+<meta property="og:site_name" content="骑鱼的猫">
+<meta property="og:description" content="Redis规约作者：陈贺 时间：2020-06-04 一.键值设计1.key名设计1.【强制】可读性和可管理性 以业务名(或数据库名)为前缀(防止key冲突)，用冒号分隔，比如业务名:表名:id:soso:event:1 2.【建议】简洁性 ​         保证语义的前提下，控制key的长度，当key较多时，内存占用也不容忽视。 ​        user:{uid}:friends:mess">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-04T08:10:36.528Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis规约">
+<meta name="twitter:description" content="Redis规约作者：陈贺 时间：2020-06-04 一.键值设计1.key名设计1.【强制】可读性和可管理性 以业务名(或数据库名)为前缀(防止key冲突)，用冒号分隔，比如业务名:表名:id:soso:event:1 2.【建议】简洁性 ​         保证语义的前提下，控制key的长度，当key较多时，内存占用也不容忽视。 ​        user:{uid}:friends:mess">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Redis规约</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/01/13/20200113-局域网DNS服务器搭建/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/06/04/20200602-Redis规约/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&text=Redis规约"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&is_video=false&description=Redis规约"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Redis规约&body=Check out this article: http://yoursite.com/2020/06/04/20200602-Redis规约/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&name=Redis规约&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis规约"><span class="toc-number">1.</span> <span class="toc-text">Redis规约</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-键值设计"><span class="toc-number">1.0.1.</span> <span class="toc-text">一.键值设计</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-key名设计"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1.key名设计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Value设计"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">2. Value设计</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、命令使用"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、命令使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、客户端使用"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、客户端使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、相关工具"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、相关工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五-附录：删除bigkey"><span class="toc-number">1.0.5.</span> <span class="toc-text">五 附录：删除bigkey</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Redis规约
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">骑鱼的猫</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-06-04T08:00:12.000Z" itemprop="datePublished">2020-06-04</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Guide/">Guide</a>, <a class="tag-link" href="/tags/Redis/">Redis</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Redis规约"><a href="#Redis规约" class="headerlink" title="Redis规约"></a><strong>Redis规约</strong></h2><p>作者：陈贺</p>
+<p>时间：2020-06-04</p>
+<h4 id="一-键值设计"><a href="#一-键值设计" class="headerlink" title="一.键值设计"></a><strong>一.键值设计</strong></h4><h5 id="1-key名设计"><a href="#1-key名设计" class="headerlink" title="1.key名设计"></a><strong>1.key名设计</strong></h5><p>1.【强制】可读性和可管理性</p>
+<p>以业务名(或数据库名)为前缀(防止key冲突)，用冒号分隔，比如<code>业务名:表名:id:soso:event:1</code></p>
+<p>2.【建议】简洁性</p>
+<p>​         保证语义的前提下，控制key的长度，当key较多时，内存占用也不容忽视。</p>
+<p>​        <code>user:{uid}:friends:messages:{mid}简化为：u:{uid}:fr:m:{mid}</code></p>
+<h5 id="2-Value设计"><a href="#2-Value设计" class="headerlink" title="2. Value设计"></a><strong>2. Value设计</strong></h5><p>1.【强制】拒绝bigkey(防止网卡流量、慢查询)</p>
+<p>string类型控制在10KB以内，hash、list、set、zset元素个数不要超过5000。非字符串的bigkey，不要使用del删除，使用hscan、sscan、zscan方式渐进式删除，同时要注意防止bigkey过期时间自动删除问题(例如一个200万的zset设置1小时过期，会触发del操作，造成阻塞，而且该操作不会不出现在慢查询中(latency可查))，查找方法和删除方法</p>
+<p>反例：一个包含200万个元素的list。</p>
+<p>2.【推荐】选择适合的数据类型。实体类型(要合理控制和使用数据结构内存编码优化配置,例如ziplist，但也要注意节省内存和性能之间的平衡)</p>
+<p>正例： hmset user:1 name tom age 19 favor football</p>
+<p>反例：    set user:1:name tom</p>
+<p>set user:1:age 19</p>
+<p>set user:1:favor footbal</p>
+<p>3.【推荐】控制key的生命周期，redis不是垃圾桶。建议使用expire设置过期时间(条件允许可以打散过期时间，防止集中过期)，不过期的数据重点关注idletime。</p>
+<h4 id="二、命令使用"><a href="#二、命令使用" class="headerlink" title="二、命令使用"></a><strong>二、命令使用</strong></h4><p>1.【推荐】 O(N)命令关注N的数量</p>
+<p>例如hgetall、lrange、smembers、zrange、sinter等并非不能使用，但是需要明确N的值。有遍历的需求可以使用hscan、sscan、zscan代替。</p>
+<p>2.【推荐】禁用命令</p>
+<p>禁止线上使用keys、flushall、flushdb等，通过redis的rename机制禁掉命令，或者使用scan的方式渐进式处理。</p>
+<p>3.【推荐】合理使用select</p>
+<p>redis的多数据库较弱，使用数字进行区分，很多客户端支持较差，同时多业务用多数据库实际还是单线程处理，会有干扰。</p>
+<p>4.【推荐】使用批量操作提高效率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原生命令：例如mget、mset。</span><br><span class="line">非原生命令：可以使用pipeline提高效率。</span><br></pre></td></tr></table></figure>
+<p>但要注意控制一次批量操作的<strong>元素个数</strong>(例如500以内，实际也和元素字节数有关)。</p>
+<p>注意两者不同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 原生是原子操作，pipeline是非原子操作。</span><br><span class="line">2. pipeline可以打包不同的命令，原生做不到</span><br><span class="line">3. pipeline需要客户端和服务端同时支持。</span><br></pre></td></tr></table></figure>
+<p>5.【建议】Redis事务功能较弱，不建议过多使用</p>
+<p>Redis的事务功能较弱(不支持回滚)，而且集群版本(自研和官方)要求一次事务操作的key必须在一个slot上(可以使用hashtag功能解决)</p>
+<p>6.【建议】Redis集群版本在使用Lua上有特殊要求：</p>
+<ol>
+<li><p>所有key都应该由 KEYS 数组来传递，redis.call/pcall 里面调用的redis命令，key的位置，必须是KEYS array, 否则直接返回error，”-ERR bad lua script for redis cluster, all the keys that the script uses should be passed using the KEYS array”</p>
+</li>
+<li><p>所有key，必须在1个slot上，否则直接返回error, “-ERR eval/evalsha command keys must in same slot”</p>
+</li>
+</ol>
+<p>7.【建议】必要情况下使用monitor命令时，要注意不要长时间使用。</p>
+<h4 id="三、客户端使用"><a href="#三、客户端使用" class="headerlink" title="三、客户端使用"></a><strong>三、客户端使用</strong></h4><p>1.【推荐】避免多个应用使用一个Redis实例</p>
+<p>正例：不相干的业务拆分，公共数据做服务化。</p>
+<p>2.【推荐】使用带有连接池的数据库，可以有效控制连接，同时提高效率，标准使用方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">执行命令如下：</span><br><span class="line">Jedis jedis = null;</span><br><span class="line">try &#123;</span><br><span class="line">    jedis = jedisPool.getResource();</span><br><span class="line">    //具体的命令</span><br><span class="line">    jedis.executeCommand()</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">    logger.error(&quot;op key &#123;&#125; error: &quot; + e.getMessage(), key, e);</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">    //注意这里不是关闭连接，在JedisPool模式下，Jedis会被归还给资源池。</span><br><span class="line">    if (jedis != null) </span><br><span class="line">        jedis.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.【建议】高并发下建议客户端添加熔断功能(例如netflix hystrix)<br>4.【推荐】设置合理的密码，如有必要可以使用SSL加密访问（阿里云Redis支持）<br>5.【建议】根据自身业务类型，选好maxmemory-policy(最大内存淘汰策略)，设置    好过期时间。<br>默认策略是volatile-lru，即超过最大内存后，在过期键中使用lru算法进行key的剔除，保证不过期数据不被删除，但是可能会出现OOM问题。</p>
+<p>其他策略如下：</p>
+<p>allkeys-lru：根据LRU算法删除键，不管数据有没有设置超时属性，直到腾出足够空间为止。</p>
+<p>allkeys-random：随机删除所有键，直到腾出足够空间为止。</p>
+<p>volatile-random:随机删除过期键，直到腾出足够空间为止。</p>
+<p>volatile-ttl：根据键值对象的ttl属性，删除最近将要过期数据。如果没有，回退到noeviction策略。</p>
+<p>noeviction：不会剔除任何数据，拒绝所有写入操作并返回客户端错误信息”(error) OOM command not allowed when used memory”，此时Redis只响应读操作。</p>
+<h4 id="四、相关工具"><a href="#四、相关工具" class="headerlink" title="四、相关工具"></a><strong>四、相关工具</strong></h4><p>1.【推荐】数据同步redis间数据同步。可以使用：redis-port</p>
+<p>2.【推荐】big key搜索 <a href="https://yq.aliyun.com/articles/117042" target="_blank" rel="noopener">redis大key搜索工具</a></p>
+<p>3.【推荐】热点key寻找(内部实现使用monitor，所以建议短时间使用)<a href="https://github.com/facebookarchive/redis-faina" target="_blank" rel="noopener">facebook的redis-faina</a></p>
+<h4 id="五-附录：删除bigkey"><a href="#五-附录：删除bigkey" class="headerlink" title="五 附录：删除bigkey"></a><strong>五 附录：删除bigkey</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 下面操作可以使用pipeline加速。</span><br><span class="line">2. redis 4.0已经支持key的异步删除，欢迎使用。</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Hash删除: hscan + hdel</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public void delBigHash(String host, int port, String password, String bigHashKey) &#123;</span><br><span class="line">    Jedis jedis = new Jedis(host, port);</span><br><span class="line">    if (password != null &amp;&amp; !&quot;&quot;.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = new ScanParams().count(100);</span><br><span class="line">    String cursor = &quot;0&quot;;</span><br><span class="line">    do &#123;</span><br><span class="line">        ScanResult&lt;Entry&lt;String, String&gt;&gt; scanResult = jedis.hscan(bigHashKey, cursor, scanParams);</span><br><span class="line">        List&lt;Entry&lt;String, String&gt;&gt; entryList = scanResult.getResult();</span><br><span class="line">        if (entryList != null &amp;&amp; !entryList.isEmpty()) &#123;</span><br><span class="line">            for (Entry&lt;String, String&gt; entry : entryList) &#123;</span><br><span class="line">                jedis.hdel(bigHashKey, entry.getKey());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; while (!&quot;0&quot;.equals(cursor));</span><br><span class="line">    </span><br><span class="line">    //删除bigkey</span><br><span class="line">    jedis.del(bigHashKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>List删除: ltrims</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public void delBigList(String host, int port, String password, String bigListKey) &#123;</span><br><span class="line">    Jedis jedis = new Jedis(host, port);</span><br><span class="line">    if (password != null &amp;&amp; !&quot;&quot;.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    long llen = jedis.llen(bigListKey);</span><br><span class="line">    int counter = 0;</span><br><span class="line">    int left = 100;</span><br><span class="line">    while (counter &lt; llen) &#123;</span><br><span class="line">        //每次从左侧截掉100个</span><br><span class="line">        jedis.ltrim(bigListKey, left, llen);</span><br><span class="line">        counter += left;</span><br><span class="line">    &#125;</span><br><span class="line">    //最终删除key</span><br><span class="line">    jedis.del(bigListKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Set删除: sscan + srem</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public void delBigSet(String host, int port, String password, String bigSetKey) &#123;</span><br><span class="line">    Jedis jedis = new Jedis(host, port);</span><br><span class="line">    if (password != null &amp;&amp; !&quot;&quot;.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = new ScanParams().count(100);</span><br><span class="line">    String cursor = &quot;0&quot;;</span><br><span class="line">    do &#123;</span><br><span class="line">        ScanResult&lt;String&gt; scanResult = jedis.sscan(bigSetKey, cursor, scanParams);</span><br><span class="line">        List&lt;String&gt; memberList = scanResult.getResult();</span><br><span class="line">        if (memberList != null &amp;&amp; !memberList.isEmpty()) &#123;</span><br><span class="line">            for (String member : memberList) &#123;</span><br><span class="line">                jedis.srem(bigSetKey, member);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; while (!&quot;0&quot;.equals(cursor));</span><br><span class="line">    </span><br><span class="line">    //删除bigkey</span><br><span class="line">    jedis.del(bigSetKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>SortedSet删除: zscan + zrem<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public void delBigZset(String host, int port, String password, String bigZsetKey) &#123;</span><br><span class="line">    Jedis jedis = new Jedis(host, port);</span><br><span class="line">    if (password != null &amp;&amp; !&quot;&quot;.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = new ScanParams().count(100);</span><br><span class="line">    String cursor = &quot;0&quot;;</span><br><span class="line">    do &#123;</span><br><span class="line">        ScanResult&lt;Tuple&gt; scanResult = jedis.zscan(bigZsetKey, cursor, scanParams);</span><br><span class="line">        List&lt;Tuple&gt; tupleList = scanResult.getResult();</span><br><span class="line">        if (tupleList != null &amp;&amp; !tupleList.isEmpty()) &#123;</span><br><span class="line">            for (Tuple tuple : tupleList) &#123;</span><br><span class="line">                jedis.zrem(bigZsetKey, tuple.getElement());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; while (!&quot;0&quot;.equals(cursor));</span><br><span class="line">    </span><br><span class="line">    //删除bigkey</span><br><span class="line">    jedis.del(bigZsetKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis规约"><span class="toc-number">1.</span> <span class="toc-text">Redis规约</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-键值设计"><span class="toc-number">1.0.1.</span> <span class="toc-text">一.键值设计</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-key名设计"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1.key名设计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Value设计"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">2. Value设计</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、命令使用"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、命令使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、客户端使用"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、客户端使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、相关工具"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、相关工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五-附录：删除bigkey"><span class="toc-number">1.0.5.</span> <span class="toc-text">五 附录：删除bigkey</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/06/04/20200602-Redis规约/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&text=Redis规约"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&is_video=false&description=Redis规约"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Redis规约&body=Check out this article: http://yoursite.com/2020/06/04/20200602-Redis规约/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&title=Redis规约"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/06/04/20200602-Redis规约/&name=Redis规约&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Chen He
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
