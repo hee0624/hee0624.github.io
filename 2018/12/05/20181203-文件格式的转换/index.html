@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1. doc2docx&amp;nbsp;&amp;nbsp;对于doc文档转docx文档，依赖于操作系统。使用windows时，依赖office；使用ubuntu时，依赖libreoffice。 linux版本12def doc2docx(doc_path, docx_path):    os.system(f&amp;#x27;soffice --headless --convert-to docx --outdir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件格式的转换">
+<meta property="og:url" content="http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="骑鱼的猫">
+<meta property="og:description" content="1. doc2docx&amp;nbsp;&amp;nbsp;对于doc文档转docx文档，依赖于操作系统。使用windows时，依赖office；使用ubuntu时，依赖libreoffice。 linux版本12def doc2docx(doc_path, docx_path):    os.system(f&amp;#x27;soffice --headless --convert-to docx --outdir">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-05T08:45:17.000Z">
+<meta property="article:modified_time" content="2021-08-27T02:21:57.633Z">
+<meta property="article:author" content="Chen He">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>文件格式的转换</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/01/23/20190123-docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/11/27/20181127-tesseract%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&text=文件格式的转换"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&is_video=false&description=文件格式的转换"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件格式的转换&body=Check out this article: http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&name=文件格式的转换&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-doc2docx"><span class="toc-number">1.</span> <span class="toc-text">1. doc2docx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#linux%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.1.</span> <span class="toc-text">linux版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#windows%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.</span> <span class="toc-text">windows版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-doc2pdf"><span class="toc-number">2.</span> <span class="toc-text">2. doc2pdf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-pdf2txt"><span class="toc-number">3.</span> <span class="toc-text">3. pdf2txt</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">3.0.1.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-number">3.0.2.</span> <span class="toc-text">方法二：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-pdf2image"><span class="toc-number">4.</span> <span class="toc-text">4. pdf2image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-pdf2xml"><span class="toc-number">5.</span> <span class="toc-text">5.pdf2xml</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        文件格式的转换
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">骑鱼的猫</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-12-05T08:45:17.000Z" itemprop="datePublished">2018-12-05</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="1-doc2docx"><a href="#1-doc2docx" class="headerlink" title="1. doc2docx"></a>1. doc2docx</h2><p>&nbsp;&nbsp;对于doc文档转docx文档，依赖于操作系统。使用windows时，依赖office；使用ubuntu时，依赖libreoffice。</p>
+<h4 id="linux版本"><a href="#linux版本" class="headerlink" title="linux版本"></a>linux版本</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doc2docx</span>(<span class="params">doc_path, docx_path</span>):</span></span><br><span class="line">    os.system(<span class="string">f&#x27;soffice --headless --convert-to docx --outdir <span class="subst">&#123;docx_path&#125;</span> <span class="subst">&#123;doc_path&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="windows版本"><a href="#windows版本" class="headerlink" title="windows版本"></a>windows版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pywin32</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> win32com <span class="keyword">import</span> client <span class="keyword">as</span> wc</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doc2docx</span>(<span class="params">doc_path, docx_path</span>):</span></span><br><span class="line">    <span class="comment"># word = wc.Dispatch(&#x27;Word.Application&#x27;)</span></span><br><span class="line">    word = wc.DispatchEx(<span class="string">&#x27;Word.Application&#x27;</span>)</span><br><span class="line">    <span class="comment"># word.Visible=1</span></span><br><span class="line">    doc = word.Documents.Open(doc_path)</span><br><span class="line">    doc.SaveAs(docx_path, <span class="number">16</span>) <span class="comment"># 16 docx ４转为txt</span></span><br><span class="line">    doc.Close()</span><br><span class="line">    word.Quit()</span><br></pre></td></tr></table></figure>
+<p><strong>备注</strong> （widows下转换效率比ubuntu高）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>libreoffice</th>
+<th>win32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>长城电工 8M</td>
+<td>36秒</td>
+<td>8秒</td>
+</tr>
+<tr>
+<td>贝斯达 27.01M</td>
+<td>2分钟</td>
+<td>12秒</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2-doc2pdf"><a href="#2-doc2pdf" class="headerlink" title="2. doc2pdf"></a>2. doc2pdf</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doc2pdf</span>(<span class="params">doc_path, pdf_path</span>):</span></span><br><span class="line">    os.system(<span class="string">f&#x27;soffice --headless --convert-to pdf --outdir <span class="subst">&#123;pdf_path&#125;</span> <span class="subst">&#123;doc_path&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-pdf2txt"><a href="#3-pdf2txt" class="headerlink" title="3. pdf2txt"></a>3. pdf2txt</h2><h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>参考<a target="_blank" rel="noopener" href="https://github.com/jsvine/pdfplumber">pdfplumber</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pdfplumber</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdfplumber</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pdf2txt</span>(<span class="params">input_file, output_file</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析PDF到TEXT&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> pdfplumber.<span class="built_in">open</span>(input_file) <span class="keyword">as</span> fp_r, <span class="built_in">open</span>(output_file, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fp_w:</span><br><span class="line">        pages = fp_r.pages</span><br><span class="line">        <span class="keyword">for</span> ix, page <span class="keyword">in</span> <span class="built_in">enumerate</span>(pages):</span><br><span class="line">            text = page.extract_text()</span><br><span class="line">            fp_w.write(text)</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pdf2txt</span>(<span class="params">input_file, output_file</span>):</span></span><br><span class="line">    os.system(<span class="string">f&#x27;pdftotext -layout <span class="subst">&#123;input_file&#125;</span> <span class="subst">&#123;output_file&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>备注</strong>:pdftotext命令行工具转换txt时，不加参数时，字体大小不一致的同一行文本，会转成多行。因此，<code>pdftotext -layout　[source] [target]</code>。其中，pdftotext 工具效率高。</p>
+<h2 id="4-pdf2image"><a href="#4-pdf2image" class="headerlink" title="4. pdf2image"></a>4. pdf2image</h2><p>参考:<a target="_blank" rel="noopener" href="https://github.com/Belval/pdf2image">pdf2image</a><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pdf2image</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pdf2image <span class="keyword">import</span> convert_from_path</span><br><span class="line"><span class="keyword">import</span> tempfile</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pdf2img</span>(<span class="params">filename, output_dir</span>):</span></span><br><span class="line">    <span class="keyword">with</span> tempfile.TemporaryDirectory() <span class="keyword">as</span> path:</span><br><span class="line">        images = convert_from_path(filename)</span><br><span class="line">        <span class="keyword">for</span> index, img <span class="keyword">in</span> <span class="built_in">enumerate</span>(images):</span><br><span class="line">            img.save(<span class="string">f&#x27;<span class="subst">&#123;output_dir&#125;</span>/page_<span class="subst">&#123;index&#125;</span>.png&#x27;</span>)</span><br></pre></td></tr></table></figure><br><strong>说明</strong>：<br>thread_count ：允许设置用于转换的线程数；<br>first_page ：允许设置由pdftoppm处理的第一个页面；<br>last_page：允许设置最后一页由pdftoppm处理；<br>fmt：允许指定输出格式。目前支持的格式是jpg、png和ppm；<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">convert_from_path(pdf_path, dpi=<span class="number">200</span>, output_folder=<span class="literal">None</span>, first_page=<span class="literal">None</span>, last_page=<span class="literal">None</span>, fmt=<span class="string">&#x27;ppm&#x27;</span>, use_cropbox=<span class="literal">False</span>)</span><br><span class="line">convert_from_bytes(pdf_file, dpi=<span class="number">200</span>, output_folder=<span class="literal">None</span>, first_page=<span class="literal">None</span>, last_page=<span class="literal">None</span>, fmt=<span class="string">&#x27;ppm&#x27;</span>, use_cropbox=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-pdf2xml"><a href="#5-pdf2xml" class="headerlink" title="5.pdf2xml"></a>5.pdf2xml</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftohtml -i -xml [source] [target]</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-doc2docx"><span class="toc-number">1.</span> <span class="toc-text">1. doc2docx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#linux%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.1.</span> <span class="toc-text">linux版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#windows%E7%89%88%E6%9C%AC"><span class="toc-number">1.0.2.</span> <span class="toc-text">windows版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-doc2pdf"><span class="toc-number">2.</span> <span class="toc-text">2. doc2pdf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-pdf2txt"><span class="toc-number">3.</span> <span class="toc-text">3. pdf2txt</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">3.0.1.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-number">3.0.2.</span> <span class="toc-text">方法二：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-pdf2image"><span class="toc-number">4.</span> <span class="toc-text">4. pdf2image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-pdf2xml"><span class="toc-number">5.</span> <span class="toc-text">5.pdf2xml</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&text=文件格式的转换"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&is_video=false&description=文件格式的转换"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件格式的转换&body=Check out this article: http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&title=文件格式的转换"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/12/05/20181203-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2/&name=文件格式的转换&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chen He
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

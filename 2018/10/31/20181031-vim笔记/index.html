@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="该笔记转自小姐姐的味道  养成习惯&amp;nbsp;&amp;nbsp;vim最大的贡献就是它的按键系统。这也是为什么chrome、idea、atom等编辑器都会提供一个vim mode。笔者见过很多资深的程序员，包括架构师，习惯使用方向键去控制光标的移动。这不能说不对，但这也抛弃了vim最大的精华所在，效率上低了一大截。坚持使用h、j、k、l，你会感谢你今天的纠正。大脑和手指真的是有记忆，当你用的足够多，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim笔记">
+<meta property="og:url" content="http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="骑鱼的猫">
+<meta property="og:description" content="该笔记转自小姐姐的味道  养成习惯&amp;nbsp;&amp;nbsp;vim最大的贡献就是它的按键系统。这也是为什么chrome、idea、atom等编辑器都会提供一个vim mode。笔者见过很多资深的程序员，包括架构师，习惯使用方向键去控制光标的移动。这不能说不对，但这也抛弃了vim最大的精华所在，效率上低了一大截。坚持使用h、j、k、l，你会感谢你今天的纠正。大脑和手指真的是有记忆，当你用的足够多，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/1">
+<meta property="og:image" content="http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/2">
+<meta property="og:image" content="http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/3">
+<meta property="og:image" content="http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/4">
+<meta property="article:published_time" content="2018-10-31T06:51:53.000Z">
+<meta property="article:modified_time" content="2021-08-27T02:21:57.620Z">
+<meta property="article:author" content="Chen He">
+<meta property="article:tag" content="vim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/1">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>vim笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/11/01/20181101-git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/10/16/20181016-CNN%E6%80%BB%E7%BB%93/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&text=vim笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&is_video=false&description=vim笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vim笔记&body=Check out this article: http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&name=vim笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%BB%E6%88%90%E4%B9%A0%E6%83%AF"><span class="toc-number">1.</span> <span class="toc-text">养成习惯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">1.常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%AB%E6%B8%B8"><span class="toc-number">2.0.1.</span> <span class="toc-text">漫游</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%EF%BC%9Ay"><span class="toc-number">2.0.2.</span> <span class="toc-text">复制：y</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%AA%E5%88%87-x"><span class="toc-number">2.0.3.</span> <span class="toc-text">剪切: x</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%EF%BC%9Ad"><span class="toc-number">2.0.4.</span> <span class="toc-text">删除：d</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%98%E8%B4%B4-p"><span class="toc-number">2.0.5.</span> <span class="toc-text">粘贴: p</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">2.可视化模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v%E8%A1%8C%E6%A8%A1%E5%BC%8F%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9"><span class="toc-number">3.0.1.</span> <span class="toc-text">v行模式，选择一些内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ctrl-v%E5%9D%97%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.0.2.</span> <span class="toc-text">ctrl+v块模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">3.命令模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">5.</span> <span class="toc-text">4.查找字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%8F%E5%BD%95%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">5.宏录制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96"><span class="toc-number">7.</span> <span class="toc-text">6.其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E9%80%80%E5%87%BA%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">7.退出编辑器</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        vim笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">骑鱼的猫</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-10-31T06:51:53.000Z" itemprop="datePublished">2018-10-31</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/vim/" rel="tag">vim</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p> 该笔记转自<a target="_blank" rel="noopener" href="https://my.oschina.net/u/3897601/blog/2253063">小姐姐的味道</a></p>
+</blockquote>
+<h2 id="养成习惯"><a href="#养成习惯" class="headerlink" title="养成习惯"></a>养成习惯</h2><p>&nbsp;&nbsp;vim最大的贡献就是它的按键系统。这也是为什么chrome、idea、atom等编辑器都会提供一个vim mode。笔者见过很多资深的程序员，包括架构师，习惯使用方向键去控制光标的移动。这不能说不对，但这也抛弃了vim最大的精华所在，效率上低了一大截。坚持使用h、j、k、l，你会感谢你今天的纠正。大脑和手指真的是有记忆，当你用的足够多，这也就成了你约定俗成的设定。<br>&nbsp;&nbsp;vim另外一个特点就是带模式的。一共四种模式，我们不需要记忆，只需要使用例子去理解即可。(不要使用vim打开大文件，vim会一次性读取所有内容到内存，容易造成宿主机内存溢出。打开文件前，可以使用du -h命令查看文件大小。一般，100MB以下为宜。)</p>
+<h2 id="1-常用操作"><a href="#1-常用操作" class="headerlink" title="1.常用操作"></a>1.常用操作</h2><p>以下操作在普通模式下执行，连续按键</p>
+<h4 id="漫游"><a href="#漫游" class="headerlink" title="漫游"></a>漫游</h4><p>j 向下<br>30j 向下移动30行<br>k 向上<br>h 向左<br>l 向右<br>0 到行首<br>^ 到行首第一个字符，如果前面有空格的话<br>$ 到行尾<br>gg 快速到文件头<br>G 快速到文件尾<br>100G 跳转到第100行</p>
+<p>不建议在插入模式下进行光标移动，这很低效</p>
+<h4 id="复制：y"><a href="#复制：y" class="headerlink" title="复制：y"></a>复制：y</h4><p>yy 复制一行<br>10yy 向下复制10行<br>yw 复制光标开始的一个单词<br>y$ 复制光标到行尾<br>yfB 复制光标到第一个大写B中间的内容<br>y2fB 复制光标到第二个大写B中间的内容</p>
+<h4 id="剪切-x"><a href="#剪切-x" class="headerlink" title="剪切: x"></a>剪切: x</h4><p>x 向剪切一个一个字符，如果是在行尾，则为向前剪切<br>3x 剪切三个<br>xp 非行尾交换两个字符，如从bs变成sb</p>
+<h4 id="删除：d"><a href="#删除：d" class="headerlink" title="删除：d"></a>删除：d</h4><p>删除的内容会放到剪贴板，按p即可粘贴到其他地方</p>
+<p>dd 删除一行<br>200dd 删除200行<br>dw 删除一个单词 （最喜欢啦）<br>df” 删除到出现的第一个双引号</p>
+<h4 id="粘贴-p"><a href="#粘贴-p" class="headerlink" title="粘贴: p"></a>粘贴: p</h4><p>p 粘贴复制或剪切的内容<br>3p 将复制或剪切的内容粘贴三次</p>
+<h2 id="2-可视化模式"><a href="#2-可视化模式" class="headerlink" title="2.可视化模式"></a>2.可视化模式</h2><h4 id="v行模式，选择一些内容"><a href="#v行模式，选择一些内容" class="headerlink" title="v行模式，选择一些内容"></a>v行模式，选择一些内容</h4><p>可视化模式是非常有用的一种模式，在普通模式下按v即可进入。<br>使用h、j、k、l进行漫游，选中相应的内容。</p>
+<p>例子，选中一部分想要的内容，并删除。<br><img src="/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/1" alt="python"></p>
+<h4 id="ctrl-v块模式"><a href="#ctrl-v块模式" class="headerlink" title="ctrl+v块模式"></a>ctrl+v块模式</h4><p>演示：将文件中的每一行添加到ArrayList中：<br><img src="/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/2" alt="python"></p>
+<p>1) 在命令模式下，执行%s/$/“);/g，在行尾追加数据<br>2) 按ESC进入普通模式，并使用gg回到行首<br>3) 按ctrl+v进入可视化模式，然后按G到文件尾<br>4) 不要理会编辑器反应，按I进入插入模式，输入list.add(“<br>5) 按ESC回到普通模式，可以发现以上输入已经在每一行生效了</p>
+<p>块模式还可以完成列互换，貌似在UE里见过此神技。<br><img src="/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/3" alt="python"></p>
+<h2 id="3-命令模式"><a href="#3-命令模式" class="headerlink" title="3.命令模式"></a>3.命令模式</h2><p>上面的例子里已经展示了命令模式的进入模式。在普通模式下，输入:即可进入。</p>
+<p>%s/$/sth/ 在行尾追加sth<br>%s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入<br>:g/\^\s<em>$/d 删除空行以及只有空格的行<br>%s/#.</em>//g 删除#之后的字符</p>
+<p>没错，命令模式用的是正则，这些经验是通用的</p>
+<p>你已经发现了，这大概就是针对编辑器窗口的sed命令。</p>
+<h2 id="4-查找字符串"><a href="#4-查找字符串" class="headerlink" title="4.查找字符串"></a>4.查找字符串</h2><p>同样的，正则的知识也可以应用*</p>
+<p>在普通模式下，按下/直接进入查找，输入相应的字符串按确定即可。</p>
+<p>n 查找下一个匹配<br>N 查找上一个匹配<br>2n 查找下面第二个匹配</p>
+<p>如果觉得跳来跳去晕头转向，可以在命令模式下输入set nu开启行号。</p>
+<h2 id="5-宏录制"><a href="#5-宏录制" class="headerlink" title="5.宏录制"></a>5.宏录制</h2><p>这可以说是vim的一个杀手锏了。拿上面的例子来说。<br>将文件中的每一行添加到ArrayList中。</p>
+<p><img src="/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/20181031-vim笔记/4" alt="python"></p>
+<p>1) 按下gg到行首<br>2) 按下qa进行宏录制，a是我们起的一个标记名称<br>3) 按I进入插入模式，输入list.add(“<br>4) 按ESC进入普通模式，然后按$跳到行尾<br>5) 按j进入下一行，然后按^回到行首<br>6) 再次按下q结束宏录制<br>7) 输入@a触发宏测试一下录制效果<br>8) 输入100@a重复宏100次，也就是影响下面的100行</p>
+<p>可以录制不同的多个宏，方便的进行批量操作</p>
+<h2 id="6-其他"><a href="#6-其他" class="headerlink" title="6.其他"></a>6.其他</h2><p>另外用的一些比较少的主要功能有<br>r 替换字符<br>ggVG 全选<br>u 恢复更改<br>J 合并下一行<br>gU 光标处转大写<br>ggguG 整篇文章大写转化为小写<br>% 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div><br>:e /tmp/a 在同一个编辑器内打开/tmp/a文件。同一个编辑器的缓冲区是剪贴板是共享的，可以方便在多个文件中复制<br>bp 跳转到上一个缓冲区<br>bn 跳转到下一个缓冲区</p>
+<h2 id="7-退出编辑器"><a href="#7-退出编辑器" class="headerlink" title="7.退出编辑器"></a>7.退出编辑器</h2><p>wq 保存当前文件并退出<br>wqa 保存所有文件并退出<br>q! 不保存，直接退出<br>qa! 有多个文件被打开，同时退出</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%BB%E6%88%90%E4%B9%A0%E6%83%AF"><span class="toc-number">1.</span> <span class="toc-text">养成习惯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">1.常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%AB%E6%B8%B8"><span class="toc-number">2.0.1.</span> <span class="toc-text">漫游</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%EF%BC%9Ay"><span class="toc-number">2.0.2.</span> <span class="toc-text">复制：y</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%AA%E5%88%87-x"><span class="toc-number">2.0.3.</span> <span class="toc-text">剪切: x</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%EF%BC%9Ad"><span class="toc-number">2.0.4.</span> <span class="toc-text">删除：d</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%98%E8%B4%B4-p"><span class="toc-number">2.0.5.</span> <span class="toc-text">粘贴: p</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">2.可视化模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v%E8%A1%8C%E6%A8%A1%E5%BC%8F%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9"><span class="toc-number">3.0.1.</span> <span class="toc-text">v行模式，选择一些内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ctrl-v%E5%9D%97%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.0.2.</span> <span class="toc-text">ctrl+v块模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">3.命令模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E6%89%BE%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">5.</span> <span class="toc-text">4.查找字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%8F%E5%BD%95%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">5.宏录制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96"><span class="toc-number">7.</span> <span class="toc-text">6.其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E9%80%80%E5%87%BA%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">7.退出编辑器</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&text=vim笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&is_video=false&description=vim笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vim笔记&body=Check out this article: http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&title=vim笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/10/31/20181031-vim%E7%AC%94%E8%AE%B0/&name=vim笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chen He
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

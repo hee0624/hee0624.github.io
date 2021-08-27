@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="&amp;emsp;&amp;emsp;字符串验证码是指包含有一串数字或其它字符的一幅图片，图片里加上一些干扰项。字符串验证码的破解主要分为以下几步：图像分割，去除噪点，分割字符串，识别字符 step1:图像分割&amp;emsp;&amp;emsp;将验证码的目标从背景中分离出来。图像阈值化分割是一种常见的分割算法，其基本原理是通过设定不同的特征阈值，把图像像素点分成若干个类。（图像二值化）&amp;emsp;&amp;emsp;阈值分割算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串验证码的识别与破解">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/index.html">
+<meta property="og:site_name" content="骑鱼的猫">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;字符串验证码是指包含有一串数字或其它字符的一幅图片，图片里加上一些干扰项。字符串验证码的破解主要分为以下几步：图像分割，去除噪点，分割字符串，识别字符 step1:图像分割&amp;emsp;&amp;emsp;将验证码的目标从背景中分离出来。图像阈值化分割是一种常见的分割算法，其基本原理是通过设定不同的特征阈值，把图像像素点分成若干个类。（图像二值化）&amp;emsp;&amp;emsp;阈值分割算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-04-27T01:19:36.000Z">
+<meta property="article:modified_time" content="2021-08-27T02:21:57.617Z">
+<meta property="article:author" content="Chen He">
+<meta property="article:tag" content="验证码">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>字符串验证码的识别与破解</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/06/29/20170629-%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/04/04/20170404-python%E5%A4%9A%E7%89%88%E6%9C%AC%E5%BC%80%E5%8F%91/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&text=字符串验证码的识别与破解"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&is_video=false&description=字符串验证码的识别与破解"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=字符串验证码的识别与破解&body=Check out this article: http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&name=字符串验证码的识别与破解&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#step1-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2"><span class="toc-number">1.</span> <span class="toc-text">step1:图像分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step2-%E5%8E%BB%E9%99%A4%E5%99%AA%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">step2:去除噪点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step3-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">step3:分割字符串</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step4-%E8%AF%86%E5%88%AB%E5%AD%97%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">step4:识别字符</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        字符串验证码的识别与破解
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">骑鱼的猫</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-04-27T01:19:36.000Z" itemprop="datePublished">2017-04-27</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E9%AA%8C%E8%AF%81%E7%A0%81/" rel="tag">验证码</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>&emsp;&emsp;字符串验证码是指包含有一串数字或其它字符的一幅图片，图片里加上一些干扰项。字符串验证码的破解主要分为以下几步：<strong>图像分割</strong>，<strong>去除噪点</strong>，<strong>分割字符串</strong>，<strong>识别字符</strong></p>
+<h5 id="step1-图像分割"><a href="#step1-图像分割" class="headerlink" title="step1:图像分割"></a>step1:图像分割</h5><p>&emsp;&emsp;将验证码的目标从背景中分离出来。图像阈值化分割是一种常见的分割算法，其基本原理是通过设定不同的特征阈值，把图像像素点分成若干个类。（图像二值化）<br>&emsp;&emsp;<strong>阈值分割算法：</strong></p>
+<ul>
+<li>分位数法</li>
+<li>最大类间方差法二值化</li>
+<li>最小误差阈值二值化</li>
+<li>熵方法</li>
+<li>最小偏态法</li>
+<li>矩量保持法</li>
+</ul>
+<h5 id="step2-去除噪点"><a href="#step2-去除噪点" class="headerlink" title="step2:去除噪点"></a>step2:去除噪点</h5><p>&emsp;&emsp;阈值二值化之后，有些验证码还有噪点，需要处理掉这些噪点。<br>&emsp;&emsp;<strong>去除噪点算法</strong></p>
+<ul>
+<li><p>去除孤立点(dotNeighbors一般设定5左右）<br>（1）遍历图片，当遇到黑色像素时，检查黑色像素周围8个联通区域的白色像素点的个数count。<br>（2）如果白色像素点的个数count&gt;=阈值，则将黑色像素点改成白色像素点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">range</span>(p.Width):</span><br><span class="line">	<span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(p.Height):</span><br><span class="line">    	count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> p.getpixel(w, h) == <span class="number">0</span>: <span class="comment"># 黑白二值化后，黑色为0，白色为1</span></span><br><span class="line">        	fow x <span class="keyword">in</span> [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]:</span><br><span class="line">            	<span class="keyword">for</span> y <span class="keyword">in</span> [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]:</span><br><span class="line">                	<span class="comment"># 如果是边界</span></span><br><span class="line">                	<span class="keyword">if</span> w+x&lt;<span class="number">0</span> <span class="keyword">or</span> h+y&lt;<span class="number">0</span> <span class="keyword">or</span> w+x&gt;=p.Width <span class="keyword">or</span> h+y&gt;=p.Height:</span><br><span class="line">                    	count += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>: </span><br><span class="line">                    	<span class="keyword">if</span> p.getpixel(w+x,h+y) == <span class="number">1</span>:</span><br><span class="line">                        	count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> count&gt;= dotNeighbors:</span><br><span class="line">        	p.setpixel(w,h,<span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>膨胀与腐蚀<br>&emsp;&emsp;区域边界点是它的一个领域中既有对象点，又有背景点。内边界点是本点为对象点，但领域中有背景点。外边界点是本点为背景点，但领域中有对象点。内边界点与外边界点是紧挨在一起的两层像素，它们总和称为形态学边界。腐蚀运算是把区域的内边界点变成背景，使区域缩小一圈；膨胀运算是将区域的外边界变成对象点，使区域扩大一圈。腐蚀运算施行于对象像素，膨胀运算施行于背景像素。可以使用4联通或者8联通边界腐蚀去燥。<br>4联通边界</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>+</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td></td>
+<td>+</td>
+</tr>
+<tr>
+<td></td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>8连通边界</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>+</th>
+<th>+</th>
+<th>+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td></td>
+<td>+</td>
+</tr>
+<tr>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>中值滤波</li>
+<li>连通去噪</li>
+</ul>
+<h5 id="step3-分割字符串"><a href="#step3-分割字符串" class="headerlink" title="step3:分割字符串"></a>step3:分割字符串</h5><p>&emsp;&emsp;字符串分割是是获得较高字符串识别率的条件之一。<br>&emsp;&emsp;<strong>分割字符串算法</strong><br>（1）垂直投影字符分割算法<br>（2）上下边界投影法<br>（3）模板匹配字符分割算法<br>（4）聚类分析字符分割法<br>（5）联通切割法<br>（6）笔段组合法<br>（7）基于颜色空间的分割</p>
+<h5 id="step4-识别字符"><a href="#step4-识别字符" class="headerlink" title="step4:识别字符"></a>step4:识别字符</h5><p>knn算法</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#step1-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2"><span class="toc-number">1.</span> <span class="toc-text">step1:图像分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step2-%E5%8E%BB%E9%99%A4%E5%99%AA%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">step2:去除噪点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step3-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">step3:分割字符串</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step4-%E8%AF%86%E5%88%AB%E5%AD%97%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">step4:识别字符</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&text=字符串验证码的识别与破解"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&is_video=false&description=字符串验证码的识别与破解"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=字符串验证码的识别与破解&body=Check out this article: http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&title=字符串验证码的识别与破解"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/04/27/20170427-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E7%A0%B4%E8%A7%A3/&name=字符串验证码的识别与破解&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Chen He
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/hee0624">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
